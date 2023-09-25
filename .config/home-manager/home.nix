@@ -55,20 +55,7 @@ imports = [
     #   echo "Hello, ${config.home.username}!"
     # '')
 
-#    xdg-desktop-portal-hyprland
 
-	
-#    openh264
-#    nordic # Nord themes GTK/KDE
-	
-
-#    socat
-    #######
-    xfce.thunar # file manager
-    xfce.thunar-archive-plugin
-    xfce.catfish # file search tool
-    gvfs # lib needed by thunar
-    bleachbit # BleachBit helps you easily clean your computer to free space and maintain privacy.
     vivaldi # browser
     termius  # terminal 
     obsidian # notes
@@ -76,7 +63,6 @@ imports = [
     wine   # windows emulator
     vscode
     #alacritty # Terminal
-    #htop # system monitor
     pavucontrol # sound control settings
     mattermost-desktop
     discord
@@ -111,7 +97,7 @@ imports = [
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
     # EDITOR = "emacs";
-    EDITOR = "nvim";
+    EDITOR = "micro";
     
   };
 
