@@ -19,9 +19,6 @@ with pkgs.lib; {
 
         # Hyprland stuff
         xdg-desktop-portal-hyprland
-        xdg-desktop-portal-wlr
-        xdg-desktop-portal
-        hyprkeys
         hyprland-protocols
 
         nwg-launchers
