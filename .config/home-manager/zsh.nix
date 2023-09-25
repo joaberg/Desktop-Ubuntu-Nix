@@ -22,11 +22,7 @@ with pkgs.lib; {
         du-dust # Disk usage tool, dust command
         fd # Find tool
         ripgrep # grep tool, rg command
-	      #ranger # filemanager
-        lf # filemanager
         yazi # filemanager
-        #xclip # Needed by micro ?
-        #wl-clipboard # Needed by micro ?
         walk # ls/cd navigation tool
         bat # Better cat
 
@@ -121,8 +117,7 @@ programs.starship = {
             ssh="TERM=xterm-256color ssh";
             home-manager-update = "nix-channel --update && nix flake update ~/.config/home-manager/ && home-manager switch";
             home-manager-cleanup = "nix-collect-garbage &&  home-manager expire-generations \"-1 days\" && nix-store --optimise";
-            #sudonix = "sudo env \"PATH=$PATH\""; # A workaround for preserving the users PATH during sudo, and gives access to programs installed via nix.
-            #sud= "sudo ~/.nix-profile/bin/zsh -ic \$@";
+            sudonix = "sudo env \"PATH=$PATH\""; # A workaround for preserving the users PATH during sudo, and gives access to programs installed via nix.
             backup_syncthing = "rsync -avz --delete ~/Documents ~/Downloads ~/Desktop ~/Backup/$(hostname)";
             snippet-nix-install-zsh = "curl -H \"Cache-Control: no-cache\" -sSL https://raw.githubusercontent.com/joaberg/server-zsh-nix/main/install.sh | bash";
             snippet-nix-update-zsh = "curl -H \"Cache-Control: no-cache\" -sSL https://raw.githubusercontent.com/joaberg/server-zsh-nix/main/update.sh | bash";
@@ -161,10 +156,6 @@ programs.starship = {
             fi
             export PATH
             
-            #Functions
-            sud() {
-              sudo ~/.nix-profile/bin/zsh -ic "$*"
-            }
 
             # FZF Dracula colors
             export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
@@ -224,85 +215,5 @@ programs.starship = {
     };
 
 
-
-
-###
-# TMUX (DISABLED)
-###
-  programs.tmux = {
-    enable = false;
-
-    shell = "$HOME/.nix-profile/bin/zsh";
-
-    # Start numbering tabs at 1, not 0
-    baseIndex = 1;
-
-    # Automatically spawn a session if trying to attach and none are running
-    newSession = true;
-
-    prefix = "C-a";
-
-    plugins = with pkgs.tmuxPlugins; [
-      sensible
-      resurrect
-      #yank
-      {
-        plugin = dracula;
-        extraConfig = ''
-          # https://draculatheme.com/tmux
-          set -g @dracula-show-battery false
-          set -g @dracula-show-powerline true
-          set -g @dracula-refresh-rate 10
-          
-          # available plugins: battery, cpu-usage, git, gpu-usage, ram-usage, tmux-ram-usage, network, network-bandwidth, network-ping, attached-clients, network-vpn, weather, time, spotify-tui, kubernetes-context, synchronize-panes
-          set -g @dracula-plugins "cpu-usage ram-usage"
-
-          # available colors: white, gray, dark_gray, light_purple, dark_purple, cyan, green, orange, red, pink, yellow
-          # set -g @dracula-[plugin-name]-colors "[background] [foreground]"
-          set -g @dracula-cpu-usage-colors "pink dark_gray"
-          
-        '';
-      }
-      {
-        plugin = continuum;
-        extraConfig = ''
-            set -g @continuum-restore 'on'
-        '';
-      }
-    ];
-
-    extraConfig = ''
-      set -g mouse on
-
-
-      # Use shift-left and shift-right to move between tabs
-        bind-key -n S-Left prev
-        bind-key -n S-Right next
-
-      # Shortcuts to move between split panes, using Control and arrow keys
-        bind-key -n C-Down select-pane -D
-        bind-key -n C-Up select-pane -U
-        bind-key -n C-Left select-pane -L
-        bind-key -n C-Right select-pane -R
-
-      # Shortcuts to split the window into multiple panes
-      #
-      # Mnemonic: the symbol (- or |) looks like the line dividing the
-      # two panes after the split.
-        bind | split-window -h
-        bind - split-window -v
-
-      # Shortcuts to resize the currently-focused pane.
-      # You can tap these repeatedly in rapid succession to adjust
-      # the size incrementally (the -r flag accomplishes this).
-        bind -r J resize-pane -D 5
-        bind -r K resize-pane -U 5
-        bind -r H resize-pane -L 5
-        bind -r L resize-pane -R 5
-
-      '';
-
-    
-  };
 
 }
