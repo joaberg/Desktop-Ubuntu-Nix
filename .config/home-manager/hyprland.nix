@@ -7,11 +7,9 @@ with pkgs.lib; {
     home.packages = with pkgs; [
 
         # Waybar stuff:
-        #waybar-hyprland
         font-awesome # Needed for waybar icons
         networkmanagerapplet
         brightnessctl # Commandline brightness controll
-        #pamixer # For sound controll (ubuntu 22.04 is using amixer by default)
         wttrbar # For weather info
         blueberry # Bluetooth config tool
         playerctl # For music controll
@@ -23,7 +21,6 @@ with pkgs.lib; {
         xdg-desktop-portal-hyprland
         xdg-desktop-portal-wlr
         xdg-desktop-portal
-        #hyprland-share-picker
         hyprkeys
         hyprland-protocols
 
@@ -45,14 +42,9 @@ with pkgs.lib; {
         qt6.qtwayland
         adwaita-qt6
         polkit
-        
         hicolor-icon-theme
         gtk-layer-shell
-
-        #pipewire
-        #wireplumber
         slurp
-        obs-studio
     ];
 
 # Fix for some XDG path issues:
@@ -409,8 +401,7 @@ with pkgs.lib; {
             exec-once = nm-applet --indicator # Network manager applet in waybar
             exec-once = wl-paste -t text --watch clipman store --no-persist  # Copy history, accessible via "SUPER + F2"
 
-            # launch redsocks / iptables for ssh forwarding.
-            exec-once = $HOME/.ssh/ssh-forward-rules.sh
+
 
 
 
@@ -424,8 +415,172 @@ with pkgs.lib; {
  programs = {
 	 waybar = {
          enable = true;
-         #package = (pkgs.waybar.override (oldAttrs: { pulseSupport = true;} ));
-         style = builtins.readFile ./configs/waybar/style3.css;
+         style = ''
+            * {
+                color: #00B6EC;
+                border: 0;
+                border-radius: 0;
+                padding: 0 0;
+                font-family:"MesloLGS NF", "DejaVu Sans", "Iosevka", "Font Awesome 5 Free";
+                font-size: 17px;
+                margin-right: 2px;
+                margin-left: 2px;
+                padding-bottom:1px;
+                
+            }
+
+            window#waybar {
+                background: rgba(0, 0, 0, 0.36);
+                background-color: transparent;
+                /*border-radius: 10px 10px 10px 10px;*/
+                
+            }
+
+            .modules-left {
+                background: rgba(0,0,0,0.36);
+                border-radius: 0px 0px 10px 0px;
+            }
+            .modules-center {
+                background: rgba(0,0,0,0.36);
+
+                padding: 0px 10px;
+                border-radius: 0px 0px 10px 10px;
+            }
+            .modules-right > * > * {
+                background: rgba(0,0,0,0.36);
+                border-radius: 0px 0px 0px 0px;
+                padding: 0px 2px;
+                margin: 0px;
+            }
+
+            #clock {
+                background-color: transparent;
+            }
+
+            #tray {
+                background: rgba(0, 0, 0, 0.36);
+                border-radius: 0px 0px 0px 10px;
+                margin: 0px;
+            }
+
+            #custom-power {
+                background: rgba(0, 0, 0, 0.36);
+                border-radius: 0px 0px 10px 0px;
+                margin: 0px;
+            }
+
+
+            @keyframes rgb_background {
+                0% {
+                    background-color: #ff0000;
+                }
+                17% {
+                    background-color: #ffff00;
+                }
+                33% {
+                    background-color: #00ff00;
+                }
+                50% {
+                    background-color: #00ffff;
+                }
+                67% {
+                    background-color: #0000ff;
+                }
+                83% {
+                    background-color: #ff00ff;
+                }
+                100% {
+                    background-color: #ff0000;
+                }
+            }
+            @keyframes rgb_border_bottom {
+                0% {
+                    box-shadow: inset 0px -3px #ff0000;
+                }
+                17% {
+                    box-shadow: inset 0px -3px #ffff00;
+                }
+                33% {
+                    box-shadow: inset 0px -3px #00ff00;
+                }
+                50% {
+                    box-shadow: inset 0px -3px #00ffff;
+                }
+                67% {
+                    box-shadow: inset 0px -3px #0000ff;
+                }
+                83% {
+                    box-shadow: inset 0px -3px #ff00ff;
+                }
+                100% {
+                    box-shadow: inset 0px -3px #ff0000;
+                }
+            }
+            @keyframes rgb_border_right {
+                0% {
+                    box-shadow: inset -3px -3px #ff0000;
+                }
+                17% {
+                    box-shadow: inset -3px -3px #ffff00;
+                }
+                33% {
+                    box-shadow: inset -3px -3px #00ff00;
+                }
+                50% {
+                    box-shadow: inset -3px -3px #00ffff;
+                }
+                67% {
+                    box-shadow: inset -3px -3px #0000ff;
+                }
+                83% {
+                    box-shadow: inset -3px -3px #ff00ff;
+                }
+                100% {
+                    box-shadow: inset -3px -3px #ff0000;
+                }
+            }
+
+            #workspaces button,
+            #taskbar button {
+                transition-duration: 0ms;
+                border-radius: 0px;
+                margin: 0px;
+                border: none;
+                padding: 2px 10px;
+            }
+            #taskbar button:last-child {
+                border-radius: 0px 0px 10px 0px;
+            }
+            #workspaces button.active,
+            #taskbar button.active {
+                animation-name: rgb_border_bottom;
+                animation-duration: 5s;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
+                box-shadow: inset 0px -3px #7857ff;
+            }
+            #taskbar button.active:last-child {
+                animation-name: rgb_border_right;
+                animation-duration: 5s;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
+                box-shadow: inset -3px -3px #7857ff;
+            }
+            #workspaces button.active:hover,
+            #taskbar button.active:hover {
+                animation-name: rgb_background;
+                animation-duration: 5s;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
+                text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+                    1px 1px 0 #000;
+                box-shadow: inset 0px -3px #af99ff;
+            }
+            #taskbar button.active:last-child:hover {
+                box-shadow: inset -3px -3px #af99ff;
+            }
+
+         '';
 
 
 ##################### Settings ######################
@@ -434,10 +589,7 @@ with pkgs.lib; {
 		    "layer" = "top";
 		 	"position" = "top";
 		 	"mod" = "dock";
-		 	#"exclusive" = true;
-		 	#"passthrough" = false;
 		 	"gtk-layer-shell" = true;
-		 	#"height" = 0;
 		 	"modules-left" = [
 		 	    	"custom/launcher"
 		 	        "custom/weather"
@@ -487,7 +639,6 @@ with pkgs.lib; {
 		 	
 		 	
 		 	"hyprland/workspaces" = {
-		 	        #"disable-scroll"= true;
 		 	        "all-outputs"= true;
 		 	        "on-click"= "activate";
 		 	        "persistent_workspaces"= {
