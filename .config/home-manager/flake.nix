@@ -1,5 +1,5 @@
 {
-  description = "Home Manager configuration of joakim";
+  description = "Home Manager configuration";
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
@@ -21,7 +21,6 @@
           allowUnfree = true;
         };
       };
-      #pkgs = nixpkgs.legacyPackages.${system};
       
       	
     in {
