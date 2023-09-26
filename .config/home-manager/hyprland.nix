@@ -377,10 +377,7 @@ with pkgs.lib; {
 
             #Background
             #exec-once = wpaperd
-            #exec-once = swaybg -m fill -i /usr/share/wallpapers/garuda-wallpapers/Malefor.jpg
-            #exec-once = swaybg -m fill -i /home/joakim/Sync/dragons_flyin.png
-            #exec-once = swaybg -m fill -i /home/joakim/.config/home-manager/configs/hyprland/keWFARyN-wallha.com.png
-            exec-once = swaybg -m fill -i /home/joakim/.nix-profile/share/hyprland/wall_anime_8K.png
+            exec-once = swaybg -m fill -i ~/.nix-profile/share/hyprland/wall_anime_8K.png
             
             #idle. Lock after 10 min. Turn off monitor after 30 min
         #	exec-once = swayidle -w timeout 600 'swaylock --clock --indicator --screenshots --effect-scale 0.4 --effect-vignette 0.2:0.5 --effect-blur 4x2 --datestr "%a %e.%m.%Y" --timestr "%k:%M"' timeout 1800 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'
