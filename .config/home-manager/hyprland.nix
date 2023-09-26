@@ -117,7 +117,7 @@ with pkgs.lib; {
             bind = $mainMod, G, togglefloating  #F1Menu
             bind = $mainMod, F, fullscreen, 1  #F1Menu
             bind = $mainMod SHIFT, F, fullscreen  #F1Menu
-            bind = $mainMod, 36, exec, alacritty
+            bind = $mainMod, 36, exec, kitty
             bind = $mainMod, Q, killactive, 
             bind = $mainMod SHIFT, E, exec, nwgbar #F1Menu 
             bind = $mainMod, N, exec, thunar #F1Menu
