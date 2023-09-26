@@ -22,7 +22,6 @@ with pkgs.lib; {
         du-dust # Disk usage tool, dust command
         fd # Find tool
         ripgrep # grep tool, rg command
-        yazi # filemanager
         walk # ls/cd navigation tool
         bat # Better cat
 
@@ -49,6 +48,13 @@ with pkgs.lib; {
       };
     };
 
+###
+# Yazi (filemanager)
+###
+  programs.yazi = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 
 ###
 # Starship prompt
