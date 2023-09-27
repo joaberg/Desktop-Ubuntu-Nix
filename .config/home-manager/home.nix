@@ -122,9 +122,10 @@ programs.kitty = {
     enable = true;
     settings = {
       font_family = "Iosevka";
-      font_size = "10.0";
-
+      font_size = "10";
+      enable_audio_bell = "no";
     };
+
 
     extraConfig = ''
           # https://draculatheme.com/kitty
