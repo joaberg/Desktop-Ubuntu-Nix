@@ -19,6 +19,9 @@ with pkgs.lib; {
 
         # Hyprland stuff
         xdg-desktop-portal-hyprland
+        xdg-desktop-portal-wlr
+        xdg-desktop-portal
+        hyprkeys
         hyprland-protocols
 
         nwg-launchers
@@ -446,11 +449,17 @@ with pkgs.lib; {
                 padding: 0px 2px;
                 margin: 0px;
             }
+            
+            #mpris {
+                background-color: transparent;
+                font-size: 10px;
+
+            }
 
             #clock {
                 background-color: transparent;
             }
-
+            
             #tray {
                 background: rgba(0, 0, 0, 0.36);
                 border-radius: 0px 0px 0px 10px;
@@ -588,8 +597,9 @@ with pkgs.lib; {
 		 	    	"custom/launcher"
 		 	        "custom/weather"
 		 	        "hyprland/workspaces"
+                    "mpris"
 		 	        /*"wlr/taskbar"*/
-		 	        "custom/spotify"
+		 	        
                 
 		 	];
 		 	"modules-center" = ["clock"];
@@ -622,7 +632,18 @@ with pkgs.lib; {
 		 		    "on-scroll-down" = "playerctl previous";
 		 	};
 		 	
-		 	
+            "mpris" = {
+                "format" = "{status_icon}{artist} | {title}";
+                "status-icons" = {
+                    "playing" = " ";
+                    "paused" =  " ";
+                    "stopped" = " ";
+                };
+                "on-click" = "playerctl play-pause";
+                "on-scroll-up" = "playerctl next";
+                "on-scroll-down" = "playerctl previous";
+            };
+
 		 	"custom/grimshot" = {
 		 			"format" = "  ";
 		 	        "tooltip"= false;
