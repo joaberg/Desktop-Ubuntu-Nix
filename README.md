@@ -18,7 +18,7 @@ List of keybindings and commands for tools I use.
 **SUPER + B** - Vivaldi browser  
 **SUPER + T** - Termius  
 **SUPER + O** - Obsidian notes  
-**SUPER + Print** - Screenshot  
+**SUPER + S** - Screenshot  
 **SUPER + F** - Fake Fullscreen  
 **SUPER + SHIFT + F** - Fullscreen  
 **SUPER + Enter/Return** - Kitty terminal  
