@@ -30,11 +30,14 @@ List of keybindings and commands for tools I use.
 **SUPER + J** - Window, togglesplit  
 **SUPER + <arrow>** - Switch focus  
 **SUPER + SHIFT + <arrow>** - Move to desktop/monitor  
+**SUPER + LeftMouse** - Move window  
+**SUPER + RightMouse** - Resize window
+
 
 ### Yazi file manager
 Using the ya function will let you navigate.  
 So when you quite yazi, the shell will be in the directory yazi was in.
->ya
+> ya
 
 Full keybinds here:  
 https://yazi-rs.github.io/docs/usage/quick-start  
@@ -56,7 +59,7 @@ https://yazi-rs.github.io/docs/usage/quick-start
 **.** -	Toggle the visibility of hidden files  
 **s** -	Search files by name using fd  
 **S** -	Search files by content using ripgrep  
-**<Ctrl-s>** -	Cancel the ongoing search  
+**Ctrl + s** -	Cancel the ongoing search  
 **z** -	Jump to a directory using zoxide  
 **Z** -	Jump to a directory, or reveal a file using fzf  
 **, ⇒ a** -	Sort alphabetically  
@@ -76,11 +79,12 @@ https://yazi-rs.github.io/docs/usage/quick-start
 
 ### Zoxide
 Use instead of cd.
->z dirname
+> z dirname
 
 
 ## Gallery
 ![image](https://github.com/joaberg/Desktop-Ubuntu-Nix/assets/58996735/64d1e5c3-50d2-4ca3-b43f-11e2b15371a3)
-![image](https://github.com/joaberg/Desktop-Ubuntu-Nix/assets/58996735/7e7669d3-7a7d-4cdf-9d0e-8cd66a1f2139)
+![image](https://github.com/joaberg/Desktop-Ubuntu-Nix/assets/58996735/d12955c8-ee72-4b4c-8c4a-138184a1827a)
+
 
 
