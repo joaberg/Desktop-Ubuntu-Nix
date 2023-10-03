@@ -15,6 +15,8 @@ with pkgs.lib; {
         playerctl # For music controll
         swappy # Screenshot edit tool 
         sway-contrib.grimshot # Screenshot tool
+        grimblast # screenshot tool
+        slurp
 
 
         # Hyprland stuff
@@ -37,14 +39,13 @@ with pkgs.lib; {
         clipman # wayland clipboard manager
         hyprpicker
         swaynotificationcenter      
-        wayshot # screenshot tool (not in use)
+        pavucontrol
           
         qt6.qtwayland
         adwaita-qt6
         polkit
         hicolor-icon-theme
         gtk-layer-shell
-        slurp
     ];
 
 # Fix for some XDG path issues:
@@ -58,7 +59,7 @@ with pkgs.lib; {
  
  services = {
  	mako = {
- 		enable = true;
+ 		enable = false;
 		defaultTimeout = 10000;
  	};
  };
@@ -181,10 +182,10 @@ with pkgs.lib; {
             bind = ,123, exec, pactl set-sink-volume @DEFAULT_SINK@ +5%
             bind = ,121, exec, pactl set-sink-volume @DEFAULT_SINK@ 0%
 
-        #	$screenshotarea = hyprctl keyword animation "fadeOut,0,0,default"; grimblast --notify copysave area; hyprctl keyword animation "fadeOut,1,4,default"
-        #	bind = $mainMod, S, exec, $screenshotarea #F1Menu
-        #	bind = , Print, exec, grimblast --notify --cursor copysave output
-        #	bind = ALT, Print, exec, grimblast --notify --cursor copysave screen
+        	#$screenshotarea = hyprctl keyword animation "fadeOut,0,0,default"; grimblast --notify copysave area; hyprctl keyword animation "fadeOut,1,4,default"
+        	bind = $mainMod, S, exec, grimblast --notify copysave area
+        	#bind = , Print, exec, grimblast --notify --cursor copysave output
+        	#bind = ALT, Print, exec, grimblast --notify --cursor copysave screen
 
             #######################
             # for resizing window
@@ -387,7 +388,10 @@ with pkgs.lib; {
 
 
             #executions which i am not certainly sure that will work for every one yeah they are also not that much important but if work then setup will become great!!
-            #exec-once = mako
+            
+            #Sway Notification Center
+            exec-once = swaync
+            
             exec-once = xrandr --output eDP-1 --primary # Workaround for issues with wine windows.
             #exec-once = /usr/lib/polkit-kde-authentication-agent-1
             
@@ -647,9 +651,9 @@ with pkgs.lib; {
 		 	"custom/grimshot" = {
 		 			"format" = "  ";
 		 	        "tooltip"= false;
-		 	        "on-click"= "grimshot --notify save output - | swappy -f -";
-		 	        "on-click-middle"= "grimshot --notify save window - | swappy -f -";
-		 	        "on-click-right"= "grimshot --notify save area - | swappy -f -";
+		 	        "on-click"= "grimshot --notify save area - | swappy -f -";
+		 	        /*"on-click-middle"= "grimshot --notify save window - | swappy -f -";
+		 	        "on-click-right"= "grimshot --notify save area - | swappy -f -"; */
 		 	};
 		 	
 		 	
