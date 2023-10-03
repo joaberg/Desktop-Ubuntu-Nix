@@ -14,7 +14,22 @@ Some stuff that needs to be fixed.
 List of keybindings and commands for tools I use.
 
 ### Hyprland
-
+**SUPER + F2** - Clipboard history  
+**SUPER + B** - exec, vivaldi browser  
+**SUPER + T** - exec, termius-app  
+**SUPER + O** - exec, obsidian notes  
+**SUPER + Print** - screenshot  
+**SUPER + F** - Fake Fullscreen  
+**SUPER + SHIFT + F** - Fullscreen  
+**SUPER + Enter/Return** - Kitty terminal  
+**SUPER + Q** - Killactive window  
+**SUPER + N** - Thunar filemanager  
+**SUPER + D** - Quick launcher  
+**SUPER + G** - Window, togglefloating  
+**SUPER + P** - Window, pseudo mode  
+**SUPER + J** - Window, togglesplit  
+**SUPER + <arrow>** - Switch focus  
+**SUPER + SHIFT + <arrow>** - Move to desktop/monitor  
 
 ### Yazi file manager
 Using the ya function will let you navigate.  
@@ -56,8 +71,16 @@ https://yazi-rs.github.io/docs/usage/quick-start
 **Ctrl+p w** - Open/close a floating pane.  
 **Ctrl+p f** - Put active pane in fullscreen.  
 **Ctrl+s e** - Add the terminal scrollback to an editor. Can also fuzzy search it first, and then save it to a file for later. Great for troubleshooting.  
+**Alt + <arrow>** - Switch focused pane
 
 
 ### Zoxide
 Use instead of cd.
 >z dirname
+
+
+## Gallery
+![image](https://github.com/joaberg/Desktop-Ubuntu-Nix/assets/58996735/64d1e5c3-50d2-4ca3-b43f-11e2b15371a3)
+![image](https://github.com/joaberg/Desktop-Ubuntu-Nix/assets/58996735/7e7669d3-7a7d-4cdf-9d0e-8cd66a1f2139)
+
+
