@@ -15,10 +15,10 @@ List of keybindings and commands for tools I use.
 
 ### Hyprland
 **SUPER + F2** - Clipboard history  
-**SUPER + B** - exec, vivaldi browser  
-**SUPER + T** - exec, termius-app  
-**SUPER + O** - exec, obsidian notes  
-**SUPER + Print** - screenshot  
+**SUPER + B** - Vivaldi browser  
+**SUPER + T** - Termius  
+**SUPER + O** - Obsidian notes  
+**SUPER + Print** - Screenshot  
 **SUPER + F** - Fake Fullscreen  
 **SUPER + SHIFT + F** - Fullscreen  
 **SUPER + Enter/Return** - Kitty terminal  
