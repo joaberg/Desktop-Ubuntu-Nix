@@ -55,7 +55,8 @@ imports = [
     #   echo "Hello, ${config.home.username}!"
     # '')
 
-
+    xfce.thunar # file manager
+    xfce.thunar-archive-plugin
     vivaldi # browser
     termius  # terminal 
     obsidian # notes
