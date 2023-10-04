@@ -11,13 +11,13 @@ Some stuff that needs to be fixed.
 
 
 ## Cheatsheet
-List of keybindings and commands for tools I use.
+List of keybindings and commands for tools I use.  
 
 ### Nix
-**Update** - nix-channel --update && nix flake update ~/.config/home-manager/ && home-manager switch
-**Upgrade** - nix-channel --update && nix-env --install --attr nixpkgs.nix nixpkgs.cacert && systemctl daemon-reload && systemctl restart nix-daemon 
-**Cleanup** - nix-collect-garbage &&  home-manager expire-generations '-5 days' && nix-store --optimise
-**Uninstall** - /nix/nix-installer uninstall
+**Update** - nix-channel --update && nix flake update ~/.config/home-manager/ && home-manager switch  
+**Upgrade** - nix-channel --update && nix-env --install --attr nixpkgs.nix nixpkgs.cacert && systemctl daemon-reload && systemctl restart nix-daemon  
+**Cleanup** - nix-collect-garbage &&  home-manager expire-generations '-5 days' && nix-store --optimise  
+**Uninstall** - /nix/nix-installer uninstall  
 
 
 ### Hyprland
@@ -38,7 +38,7 @@ List of keybindings and commands for tools I use.
 **SUPER + arrow** - Switch focus  
 **SUPER + SHIFT + arrow** - Move to desktop/monitor  
 **SUPER + LeftMouse** - Move window  
-**SUPER + RightMouse** - Resize window
+**SUPER + RightMouse** - Resize window 
 
 
 ### Yazi file manager
