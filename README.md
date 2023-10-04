@@ -13,6 +13,13 @@ Some stuff that needs to be fixed.
 ## Cheatsheet
 List of keybindings and commands for tools I use.
 
+### Nix
+**Update** - nix-channel --update && nix flake update ~/.config/home-manager/ && home-manager switch
+**Upgrade** - nix-channel --update && nix-env --install --attr nixpkgs.nix nixpkgs.cacert && systemctl daemon-reload && systemctl restart nix-daemon 
+**Cleanup** - nix-collect-garbage &&  home-manager expire-generations '-5 days' && nix-store --optimise
+**Uninstall** - /nix/nix-installer uninstall
+
+
 ### Hyprland
 **SUPER + F2** - Clipboard history  
 **SUPER + B** - Vivaldi browser  
@@ -28,8 +35,8 @@ List of keybindings and commands for tools I use.
 **SUPER + G** - Window, togglefloating  
 **SUPER + P** - Window, pseudo mode  
 **SUPER + J** - Window, togglesplit  
-**SUPER + <arrow>** - Switch focus  
-**SUPER + SHIFT + <arrow>** - Move to desktop/monitor  
+**SUPER + arrow** - Switch focus  
+**SUPER + SHIFT + arrow** - Move to desktop/monitor  
 **SUPER + LeftMouse** - Move window  
 **SUPER + RightMouse** - Resize window
 
@@ -42,7 +49,7 @@ So when you quite yazi, the shell will be in the directory yazi was in.
 Full keybinds here:  
 https://yazi-rs.github.io/docs/usage/quick-start  
 
-**<Space>** -	Toggle selection of highlighted file/directory  
+**Space** -	Toggle selection of highlighted file/directory  
 **o** -	Open the selected files  
 **y** -	Copy the selected files  
 **x** -	Cut the selected files  
@@ -74,12 +81,16 @@ https://yazi-rs.github.io/docs/usage/quick-start
 **Ctrl+p w** - Open/close a floating pane.  
 **Ctrl+p f** - Put active pane in fullscreen.  
 **Ctrl+s e** - Add the terminal scrollback to an editor. Can also fuzzy search it first, and then save it to a file for later. Great for troubleshooting.  
-**Alt + <arrow>** - Switch focused pane
+**Alt + arrow** - Switch focused pane
 
 
 ### Zoxide
 Use instead of cd.
 > z dirname
+
+### ZSH
+**sud** - a sudo alias, to preserve the users env and path (Because "sudo -E" will not work on many distros due to settings in visudo. You should look into that first). Use without any commands to get into a shell with root access. This is a bit hacky, and might mess up owner/group in config files. Its defined as a function in the zsh extraconfig.  
+**ssh** - Type **ssh space tab** to get a ssh menu with fuzzy search. It reads the .ssh/config file. Check the format here: https://github.com/sunlei/zsh-ssh  
 
 
 ## Gallery
