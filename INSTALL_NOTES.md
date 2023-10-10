@@ -69,3 +69,8 @@ Optional:
 22.04 uses pulseaudio instead of pipewire. Change to pipewire by following this quick guide.
 https://ubuntuhandbook.org/index.php/2022/04/pipewire-replace-pulseaudio-ubuntu-2204/amp/
 
+### Notes
+Had an issue of a missing cursor in foot terminal.  
+Solved it by changing cursor theme with this script:  
+https://github.com/Lassebq/gtk-theme
+ 
