@@ -21,7 +21,10 @@ List of keybindings and commands for tools I use.
 
 
 ### Hyprland
-**SUPER + F2** - Clipboard history  
+**SUPER + F1** - Special workspace (Chats)  
+**SUPER + F2** - Special workspace (Terminals)  
+**SUPER + F3** - Special workspace (default)  
+**SUPER + F4** - Clipboard history  
 **SUPER + B** - Vivaldi browser  
 **SUPER + T** - Termius  
 **SUPER + O** - Obsidian notes  
