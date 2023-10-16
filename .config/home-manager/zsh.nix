@@ -117,8 +117,9 @@ programs.starship = {
             x = "exit";
             m = "micro";
             vim = "hx";
-            cat = "bat";
+            cat = "bat -p";
             #ssh="TERM=xterm-256color ssh";
+            ripdrag = "ripdrag $(fzf)";
             home-manager-update = "nix-channel --update && nix flake update ~/.config/home-manager/ && home-manager switch";
             home-manager-cleanup = "nix-collect-garbage &&  home-manager expire-generations \"-1 days\" && nix-store --optimise";
             backup_syncthing = "rsync -avz --delete ~/Documents ~/Downloads ~/Desktop ~/Backup/$(hostname)";
