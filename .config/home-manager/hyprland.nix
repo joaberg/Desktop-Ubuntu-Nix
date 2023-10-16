@@ -18,8 +18,11 @@ with pkgs.lib; {
         grimblast # screenshot tool
         slurp
 
-
         # Hyprland stuff
+        libva # screenshare testing
+        libsForQt5.qt5.qtwayland # screenshare testing
+        qt6.qtwayland # screenshare testing
+        adwaita-qt6 # screenshare testing
         xdg-desktop-portal-hyprland
         xdg-desktop-portal-wlr
         xdg-desktop-portal
@@ -46,6 +49,7 @@ with pkgs.lib; {
         polkit
         hicolor-icon-theme
         gtk-layer-shell
+        ripdrag # drag files from terminal
     ];
 
 # Fix for some XDG path issues:
@@ -53,7 +57,6 @@ with pkgs.lib; {
   xdg.mime.enable=true;
   targets.genericLinux.enable=true;
   xdg.systemDirs.data = [ "${config.home.homeDirectory}/.nix-profile/share/applications"  "${config.home.homeDirectory}/.nix-profile/share/" ];
-
 
 
  
@@ -80,9 +83,8 @@ with pkgs.lib; {
       enable = true;
       xwayland.enable = true;
       systemdIntegration = true;
-      
-
       extraConfig = ''
+            env = WLR_NO_HARDWARE_CURSORS,1
 
             ###########################################################
             #
@@ -109,27 +111,34 @@ with pkgs.lib; {
             # See https://wiki.hyprland.org/Configuring/Keywords/ for more
             $mainMod = SUPER 
             #Keybind info menu:
-            bind = $mainMod, F1, exec, ~/.config/hypr/keybind
-            bind = $mainMod, F2, exec, clipman pick -t wofi #F1Menu
+
+            bind = $mainMod, F1, togglespecialworkspace, special-chat
+            bind = $mainMod SHIFT, F1, movetoworkspace, special:special-chat
+            bind = $mainMod, F2, togglespecialworkspace, special-term
+            bind = $mainMod SHIFT, F2, movetoworkspace, special:special-term
+            bind = $mainMod, F3, togglespecialworkspace # Default unnamed workspace
+            
+            bind = $mainMod, F4, exec, clipman pick -t wofi # Clipboard History
+            
             #################################
             # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-            bind = $mainMod, B, exec, vivaldi #F1Menu
-            bind = $mainMod, T, exec, termius-app #F1Menu
-            bind = $mainMod, O, exec, obsidian #F1Menu
-            bind = $mainMod, L, exec, swaylock --clock --indicator --screenshots --effect-scale 0.4 --effect-vignette 0.2:0.5 --effect-blur 4x2 --datestr "%a %e.%m.%Y" --timestr "%k:%M" #F1Menu
-            bind = $mainMod, Print , exec , grim #F1Menu 
-            bind = $mainMod, G, togglefloating  #F1Menu
-            bind = $mainMod, F, fullscreen, 1  #F1Menu
-            bind = $mainMod SHIFT, F, fullscreen  #F1Menu
-            bind = $mainMod, 36, exec, kitty
+            bind = $mainMod, B, exec, vivaldi 
+            bind = $mainMod, T, exec, termius-app 
+            bind = $mainMod, O, exec, obsidian 
+            bind = $mainMod, L, exec, swaylock --clock --indicator --screenshots --effect-scale 0.4 --effect-vignette 0.2:0.5 --effect-blur 4x2 --datestr "%a %e.%m.%Y" --timestr "%k:%M" 
+            bind = $mainMod, Print , exec , grim  
+            bind = $mainMod, G, togglefloating  
+            bind = $mainMod, F, fullscreen, 1  
+            bind = $mainMod SHIFT, F, fullscreen  
+            bind = $mainMod, 36, exec, footclient
             bind = $mainMod, Q, killactive, 
-            bind = $mainMod SHIFT, E, exec, nwgbar #F1Menu 
-            bind = $mainMod, N, exec, thunar #F1Menu
-            bind = $mainMod SHIFT, 65, togglefloating, #F1Menu
-            bind = $mainMod, D, exec, wofi -i -G --show drun --allow-images #F1Menu
-            bind = $mainMod SHIFT, D, exec, nwg-drawer #F1Menu
-            bind = $mainMod, P, pseudo, # dwindle #F1Menu
-            bind = $mainMod, J, togglesplit, # dwindle #F1Menu
+            bind = $mainMod SHIFT, E, exec, nwgbar  
+            bind = $mainMod, N, exec, thunar 
+            bind = $mainMod SHIFT, 65, togglefloating, 
+            bind = $mainMod, D, exec, wofi -i -G --show drun --allow-images 
+            bind = $mainMod SHIFT, D, exec, nwg-drawer 
+            bind = $mainMod, P, pseudo, # dwindle 
+            bind = $mainMod, J, togglesplit, # dwindle 
             ##################################
 
             # Move focus with mainMod + arrow keys
@@ -167,8 +176,8 @@ with pkgs.lib; {
             bind = $mainMod SHIFT, 0, movetoworkspace, 10
 
             # Scroll through existing workspaces with mainMod + scroll
-            bind = $mainMod, mouse_down, workspace, e+1
-            bind = $mainMod, mouse_up, workspace, e-1
+            bind = $mainMod, mouse_down, workspace, m+1
+            bind = $mainMod, mouse_up, workspace, m-1
 
             # Move/resize windows with mainMod + LMB/RMB and dragging
             bindm = $mainMod, mouse:272, movewindow
@@ -182,7 +191,6 @@ with pkgs.lib; {
             bind = ,123, exec, pactl set-sink-volume @DEFAULT_SINK@ +5%
             bind = ,121, exec, pactl set-sink-volume @DEFAULT_SINK@ 0%
 
-        	#$screenshotarea = hyprctl keyword animation "fadeOut,0,0,default"; grimblast --notify copysave area; hyprctl keyword animation "fadeOut,1,4,default"
         	bind = $mainMod, S, exec, grimblast --notify copysave area
         	#bind = , Print, exec, grimblast --notify --cursor copysave output
         	#bind = ALT, Print, exec, grimblast --notify --cursor copysave screen
@@ -190,7 +198,7 @@ with pkgs.lib; {
             #######################
             # for resizing window
             # will switch to a submap called resize
-            bind=$mainMod,R,submap,resize #F1Menu
+            bind=$mainMod,R,submap,resize 
             # will start a submap called "resize"
             submap=resize
             # sets repeatable binds for resizing the active window
@@ -216,11 +224,6 @@ with pkgs.lib; {
             #     Settings
             #
             ##########################################################
-
-
-
-            # Source a file (multi-file configs)
-        #	source = ~/.config/hypr/mocha.conf
 
             # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
             input {
@@ -385,6 +388,7 @@ with pkgs.lib; {
             
             #idle. Lock after 10 min. Turn off monitor after 30 min
         #	exec-once = swayidle -w timeout 600 'swaylock --clock --indicator --screenshots --effect-scale 0.4 --effect-vignette 0.2:0.5 --effect-blur 4x2 --datestr "%a %e.%m.%Y" --timestr "%k:%M"' timeout 1800 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'
+        	exec-once = swayidle -w timeout 600 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'
 
 
             #executions which i am not certainly sure that will work for every one yeah they are also not that much important but if work then setup will become great!!
@@ -396,13 +400,18 @@ with pkgs.lib; {
             #exec-once = /usr/lib/polkit-kde-authentication-agent-1
             
             # This will make sure that xdg-desktop-portal-hyprland can get the required variables on startup.
-            #exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+            exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
             #exec-once = /usr/lib/xdg-desktop-portal-hyprland
+            exec-once = ~/.nix-profile/libexec/xdg-desktop-portal-hyprland
+            exec-once = ~/.nix-profile/libexec/xdg-desktop-portal
 
             exec-once = nm-applet --indicator # Network manager applet in waybar
             exec-once = wl-paste -t text --watch clipman store --no-persist  # Copy history, accessible via "SUPER + F2"
 
-
+            ## Autostart apps
+            exec-once=[workspace 1 silent] vivaldi
+            exec-once=[workspace 2 silent] code
+            exec-once=[workspace 2 silent] obsidian
 
 
 
@@ -660,6 +669,8 @@ with pkgs.lib; {
 		 	"hyprland/workspaces" = {
 		 	        "all-outputs"= true;
 		 	        "on-click"= "activate";
+                    "on-scroll-up"= "hyprctl dispatch workspace m+1";
+                    "on-scroll-down"= "hyprctl dispatch workspace m-1";
 		 	        "persistent_workspaces"= {
 		 	            "1"= ["DP-5"];
 		 	            "2"= ["DP-5"];
@@ -678,7 +689,7 @@ with pkgs.lib; {
                     # add "%sudo ALL=NOPASSWD:/usr/bin/apt-get" to the sudoers file.
                     "exec"="(sudo apt-get update > /dev/null && sudo apt-get --just-print upgrade | grep -c ^Inst) || echo 0";
 		 	    	"exec-if"= "exit 0";
-		 	    	"on-click"= "alacritty -e zsh -c 'sudo apt upgrade && echo -e \"\n\n\033[31mRemember to also run home-manager-update\nPress Enter to close\033[0m\" && read'";
+		 	    	"on-click"= "foot zsh -c 'sudo apt upgrade && echo -e \"\n\n\033[31mRemember to also run home-manager-update\nPress Enter to close\033[0m\" && read'";
 		 	        "interval"= 14400; # every 4h
 		 	        "format"= "  {} ";
 		 	};
