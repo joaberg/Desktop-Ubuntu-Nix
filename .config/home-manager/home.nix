@@ -55,20 +55,32 @@ imports = [
     #   echo "Hello, ${config.home.username}!"
     # '')
 
+#    xdg-desktop-portal-hyprland
+
+	
+#    openh264
+#    nordic # Nord themes GTK/KDE
+	
+
+#    socat
+    #######
     xfce.thunar # file manager
     xfce.thunar-archive-plugin
+    #gvfs # lib needed by thunar
     vivaldi # browser
     termius  # terminal 
     obsidian # notes
     spotify # music
     wine   # windows emulator
     vscode
-    #alacritty # Terminal
-    pavucontrol # sound control settings
+    #pavucontrol # sound control settings
     mattermost-desktop
     discord
     libreoffice
-      
+    
+    ### Gaming 
+    #gamescope # https://github.com/ValveSoftware/gamescope
+    #steam  
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -119,6 +131,61 @@ imports = [
  };
 
 
+programs.foot = {
+    enable = true;
+    server.enable = true;
+    settings = {
+      # https://github.com/dracula/foot/blob/master/foot.ini
+      # options: https://codeberg.org/dnkl/foot/src/branch/master/foot.ini
+      main = {
+        term = "xterm-256color";
+        font = "Iosevka:size=10";
+        selection-target = "both"; # One of none, primary, clipboard or both. Default: primary.
+      };
+
+      colors = {
+        # Dracula theme
+        # alpha=1.0
+        #background = "282a36";
+        background = "101014";
+        foreground = "f8f8f2";
+
+        ## Normal/regular colors (color palette 0-7)
+        regular0 = "21222c";  # black
+        regular1 = "ff5555";  # red
+        regular2 = "50fa7b";  # green
+        regular3 = "f1fa8c";  # yellow
+        regular4 = "bd93f9";  # blue
+        regular5 = "ff79c6";  # magenta
+        regular6 = "8be9fd";  # cyan
+        regular7 = "f8f8f2";  # white
+
+        ## Bright colors (color palette 8-15)
+        bright0 = "6272a4";   # bright black
+        bright1 = "ff6e6e";   # bright red
+        bright2 = "69ff94";   # bright green
+        bright3 = "ffffa5";   # bright yellow
+        bright4 = "d6acff";   # bright blue
+        bright5 = "ff92df";   # bright magenta
+        bright6 = "a4ffff";   # bright cyan
+        bright7 = "ffffff";   # bright white
+
+        ## Misc colors
+        selection-foreground = "ffffff";
+        selection-background = "44475a";
+        # jump-labels=<regular0> <regular3>          # black-on-yellow
+        # scrollback-indicator=<regular0> <bright4>  # black-on-bright-blue
+        # search-box-no-match=<regular0> <regular1>  # black-on-red
+        # search-box-match=<regular0> <regular3>     # black-on-yellow
+        urls = "8be9fd";
+      };
+
+    };
+
+  
+
+  };
+
 programs.kitty = {
     enable = true;
     settings = {
@@ -126,7 +193,6 @@ programs.kitty = {
       font_size = "10";
       enable_audio_bell = "no";
     };
-
 
     extraConfig = ''
           # https://draculatheme.com/kitty
