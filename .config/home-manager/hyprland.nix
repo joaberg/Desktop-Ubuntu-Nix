@@ -117,7 +117,8 @@ with pkgs.lib; {
             bind = $mainMod, F2, togglespecialworkspace, special-term
             bind = $mainMod SHIFT, F2, movetoworkspace, special:special-term
             bind = $mainMod, F3, togglespecialworkspace # Default unnamed workspace
-            
+            bind = $mainMod SHIFT, F3, movetoworkspace, special
+
             bind = $mainMod, F4, exec, clipman pick -t wofi # Clipboard History
             
             #################################
