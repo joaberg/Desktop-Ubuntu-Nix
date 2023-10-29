@@ -68,9 +68,9 @@ Type=Application
 Optional:
 22.04 uses pulseaudio instead of pipewire. Change to pipewire by following this quick guide.
 https://ubuntuhandbook.org/index.php/2022/04/pipewire-replace-pulseaudio-ubuntu-2204/amp/  
-(needed to install pipewire-tests as well, to get the examples)  
-Had to run this to get wireplumber to install without an error.  
-```sudo mv /etc/systemd/user/pipewire-session-manager.service /etc/systemd/user/pipewire-session-manager.service-BAK```
+https://gist.github.com/the-spyke/2de98b22ff4f978ebf0650c90e82027e  
+
+
 
 
 ### Notes
