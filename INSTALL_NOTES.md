@@ -68,6 +68,7 @@ Type=Application
 Optional:
 22.04 uses pulseaudio instead of pipewire. Change to pipewire by following this quick guide.
 https://ubuntuhandbook.org/index.php/2022/04/pipewire-replace-pulseaudio-ubuntu-2204/amp/
+(needed to install pipewire-tests as well, to get the examples)
 
 ### Notes
 Had an issue of a missing cursor in foot terminal.  
