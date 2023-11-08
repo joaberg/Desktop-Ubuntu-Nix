@@ -6,8 +6,7 @@ Check install notes first, then look at the conf files for inspiration, dont cop
 
 ## TODO
 Some stuff that needs to be fixed.
-- [ ] Screensharing, havent got this working. Looks like xdg-desktop-portal-hyprland is working. Suspect it could be an issue with pipewire or wireplumber. obs-studio does not find pipewire support.
-- [ ] Swaylock, unclock will fail.
+- [ ] Swaylock, unlock will fail. Only using the idle at the moment, as i dont really need the locking.
 
 
 ## Cheatsheet
@@ -31,7 +30,7 @@ List of keybindings and commands for tools I use.
 **SUPER + S** - Screenshot  
 **SUPER + F** - Fake Fullscreen  
 **SUPER + SHIFT + F** - Fullscreen  
-**SUPER + Enter/Return** - Kitty terminal  
+**SUPER + Enter/Return** - Foot terminal  
 **SUPER + Q** - Killactive window  
 **SUPER + N** - Thunar filemanager  
 **SUPER + D** - Quick launcher  
@@ -51,8 +50,9 @@ So when you quite yazi, the shell will be in the directory yazi was in.
 
 Full keybinds here:  
 https://yazi-rs.github.io/docs/usage/quick-start  
-
+**?** -	Help, see all the keybinds  
 **Space** -	Toggle selection of highlighted file/directory  
+**Ctrl + Enter** -	Choose how to open the selected file  
 **o** -	Open the selected files  
 **y** -	Copy the selected files  
 **x** -	Cut the selected files  
@@ -88,8 +88,10 @@ https://yazi-rs.github.io/docs/usage/quick-start
 
 
 ### Zoxide
-Use instead of cd.
-> z dirname
+Use instead of cd.  
+**> z dirname**  
+Choose a directory from the z database.  
+**> zi**  
 
 ### ZSH
 **sud** - a sudo alias, to preserve the users env and path (Because "sudo -E" will not work on many distros due to settings in visudo. You should look into that first). Use without any commands to get into a shell with root access. This is a bit hacky, and might mess up owner/group in config files. Its defined as a function in the zsh extraconfig.  
