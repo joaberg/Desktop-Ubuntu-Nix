@@ -74,7 +74,35 @@ https://gist.github.com/the-spyke/2de98b22ff4f978ebf0650c90e82027e
 
 
 ### Notes
+#### Cursor
 Had an issue of a missing cursor in foot terminal.  
 Solved it by changing cursor theme with this script:  
 https://github.com/Lassebq/gtk-theme
+
+ #### Bluetooth headset
+ Had a problem with my bluetooth headset not switching on the microphone when i went into Teams meetings.  
+ This will make Bluez automatic profile switching trigger on defined application inputs  
  
+ ~/.config/wireplumber/policy.lua.d/10-default-policy.lua  
+ or /usr/share/wireplumber/policy.lua.d/10-default-policy.lua  
+
+```lua
+bluetooth_policy.policy = {
+  -- Whether to store state on the filesystem.
+  ["use-persistent-storage"] = true,
+
+  -- Whether to use headset profile in the presence of an input stream.
+  ["media-role.use-headset-profile"] = true,
+
+  -- Application names correspond to application.name in stream properties.
+  -- Applications which do not set media.role but which should be considered
+  -- for role based profile switching can be specified here.
+  ["media-role.applications"] = { "Chromium input", "Firefox", "Google Chrome input", "ZOOM VoiceEngine" },
+}
+```
+
+changed this line to include Edge, which i use for Teams:  
+(You can see the input names in pavucontrol/Recording)  
+```lua 
+["media-role.applications"] = { "Chromium input", "Firefox", "Google Chrome input", "ZOOM VoiceEngine", "Microsoft Edge input" },
+```
