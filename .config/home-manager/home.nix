@@ -66,7 +66,10 @@ imports = [
     #######
     xfce.thunar # file manager
     xfce.thunar-archive-plugin
-    #gvfs # lib needed by thunar
+    gvfs # lib needed by thunar
+    xfce.xfconf # needed by thunar
+    zathura # pdf viewer
+
     vivaldi # browser
     termius  # terminal 
     obsidian # notes
@@ -79,7 +82,7 @@ imports = [
     libreoffice
     
     ### Gaming 
-    #gamescope # https://github.com/ValveSoftware/gamescope
+	 warzone2100
     #steam  
   ];
 
@@ -138,8 +141,9 @@ programs.foot = {
       # https://github.com/dracula/foot/blob/master/foot.ini
       # options: https://codeberg.org/dnkl/foot/src/branch/master/foot.ini
       main = {
-        term = "xterm-256color";
-        font = "Iosevka:size=10";
+        #term = "xterm-256color";
+        term = "foot";
+        font = "iosevka:size=10, MesloLGS NF:size=10";
         selection-target = "both"; # One of none, primary, clipboard or both. Default: primary.
       };
 
