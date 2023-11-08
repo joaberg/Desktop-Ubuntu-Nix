@@ -24,8 +24,8 @@ with pkgs.lib; {
         qt6.qtwayland # screenshare testing
         adwaita-qt6 # screenshare testing
         xdg-desktop-portal-hyprland
-        xdg-desktop-portal-wlr
-        xdg-desktop-portal
+        #xdg-desktop-portal-wlr
+        #xdg-desktop-portal
         hyprkeys
         hyprland-protocols
 
@@ -43,7 +43,8 @@ with pkgs.lib; {
         hyprpicker
         swaynotificationcenter      
         pavucontrol
-          
+
+        bibata-cursors  
         qt6.qtwayland
         adwaita-qt6
         polkit
@@ -67,6 +68,33 @@ with pkgs.lib; {
  	};
  };
 
+
+## GTK theme stuff
+home.pointerCursor = {
+    gtk.enable = true;
+    x11.enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Amber";
+    size = 24;
+};
+gtk = {
+    enable = true;
+    theme = {
+        package = pkgs.flat-remix-gtk;
+        name = "Flat-Remix-GTK-Grey-Darkest";
+    };
+    iconTheme = {
+        package = pkgs.libsForQt5.breeze-icons;
+        name = "breeze-dark";
+    };
+    font = {
+        name = "Sans";
+        size = 10;
+    };
+};        
+
+
+
 ################################################
 #Below are configs for:
 # Hyprland
@@ -81,8 +109,8 @@ with pkgs.lib; {
   wayland.windowManager.hyprland = {
       #extraConfig = builtins.readFile ./configs/hyprland/hyprland.conf;
       enable = true;
-      xwayland.enable = true;
-      systemdIntegration = true;
+      #xwayland.enable = true;
+      #systemdIntegration = true;
       extraConfig = ''
             env = WLR_NO_HARDWARE_CURSORS,1
 
@@ -118,8 +146,11 @@ with pkgs.lib; {
             bind = $mainMod SHIFT, F2, movetoworkspace, special:special-term
             bind = $mainMod, F3, togglespecialworkspace # Default unnamed workspace
             bind = $mainMod SHIFT, F3, movetoworkspace, special
-
             bind = $mainMod, F4, exec, clipman pick -t wofi # Clipboard History
+            workspace = special:special-chat,gapsin:5,gapsout:5,bordersize:1
+            workspace = special:special-term,gapsin:10,gapsout:10,bordersize:1
+            workspace = special,gapsin:0,gapsout:0,bordersize:0
+
             
             #################################
             # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
@@ -296,11 +327,13 @@ with pkgs.lib; {
                 # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
                 pseudotile = yes # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
                 preserve_split = yes # you probably want this
+                special_scale_factor = 1.0
             }
 
             master {
                 # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
                 new_is_master = true
+                special_scale_factor = 1.0
             }
 
             gestures {
@@ -410,9 +443,9 @@ with pkgs.lib; {
             exec-once = wl-paste -t text --watch clipman store --no-persist  # Copy history, accessible via "SUPER + F2"
 
             ## Autostart apps
-            exec-once=[workspace 1 silent] vivaldi
-            exec-once=[workspace 2 silent] code
-            exec-once=[workspace 2 silent] obsidian
+            #exec-once=[workspace 1 silent] vivaldi
+            #exec-once=[workspace 3 silent] code
+            #exec-once=[workspace 3 silent] obsidian
 
 
 
@@ -433,7 +466,7 @@ with pkgs.lib; {
                 border-radius: 0;
                 padding: 0 0;
                 font-family:"MesloLGS NF", "DejaVu Sans", "Iosevka", "Font Awesome 5 Free";
-                font-size: 17px;
+                font-size: 12px;
                 margin-right: 2px;
                 margin-left: 2px;
                 padding-bottom:1px;
@@ -672,7 +705,7 @@ with pkgs.lib; {
 		 	        "on-click"= "activate";
                     "on-scroll-up"= "hyprctl dispatch workspace m+1";
                     "on-scroll-down"= "hyprctl dispatch workspace m-1";
-		 	        "persistent_workspaces"= {
+		 	        /*"persistent_workspaces"= {
 		 	            "1"= ["DP-5"];
 		 	            "2"= ["DP-5"];
 		 	            "3"= ["eDP-1"];
@@ -683,7 +716,7 @@ with pkgs.lib; {
 		 	            "8"= [];
 		 	            "9"= [];
 		 	            "10"= [];
-		 	        };
+		 	        }; */
 		 	};
 		 	
 		 	"custom/updates" = {
@@ -802,9 +835,11 @@ with pkgs.lib; {
 		 	        #"on-click" = "pamixer -t";
                     "on-click" = "pavucontrol";
 		 	        #"on-scroll-up" = "pamixer -i 5";
-                    "on-scroll-up" = "amixer -D pulse sset Master 5%+";
+                    #"on-scroll-up" = "amixer -D pulse sset Master 5%+";
+                    "on-scroll-up" = "amixer -D pipewire sset Master 5%+";
 		 	        #"on-scroll-down" = "pamixer -d 5";
-                    "on-scroll-down" = "amixer -D pulse sset Master 5%-";
+                    #"on-scroll-down" = "amixer -D pulse sset Master 5%-";
+                    "on-scroll-down" = "amixer -D pipewire sset Master 5%-";
 		 	        "scroll-step" = 5;
 		 	        "format-icons" = {
 		 	            "headphone" = "";
