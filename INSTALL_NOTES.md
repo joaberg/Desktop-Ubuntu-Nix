@@ -27,6 +27,8 @@ nix-shell '<home-manager>' -A install
 nix run home-manager/master -- init --switch 
 ```
 
+## Additional changes
+
 seatd
 ```sh
 sudo apt install seatd
@@ -65,21 +67,26 @@ Exec=nixGL Hyprland
 Type=Application
 ```
 
-Optional:
+## Optional
+### Pipewire / Wireplumber
 22.04 uses pulseaudio instead of pipewire. Change to pipewire by following this quick guide.
 https://ubuntuhandbook.org/index.php/2022/04/pipewire-replace-pulseaudio-ubuntu-2204/amp/  
 https://gist.github.com/the-spyke/2de98b22ff4f978ebf0650c90e82027e  
 
+### Battery tuning
+```
+sudo apt install powertop
+sudo powertop --auto-tune
+```
 
 
-
-### Notes
-#### Cursor
+## Notes
+### Cursor
 Had an issue of a missing cursor in foot terminal.  
 Solved it by changing cursor theme with this script:  
 https://github.com/Lassebq/gtk-theme
 
- #### Bluetooth headset
+ ### Bluetooth headset
  Had a problem with my bluetooth headset not switching on the microphone when i went into Teams meetings.  
  This will make Bluez automatic profile switching trigger on defined application inputs  
  
