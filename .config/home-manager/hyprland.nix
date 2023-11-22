@@ -154,6 +154,7 @@ gtk = {
             
             #################################
             # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
+		 # can check the keyname with: xev
             bind = $mainMod, B, exec, vivaldi 
             bind = $mainMod, T, exec, termius-app 
             bind = $mainMod, O, exec, obsidian 
@@ -162,7 +163,7 @@ gtk = {
             bind = $mainMod, G, togglefloating  
             bind = $mainMod, F, fullscreen, 1  
             bind = $mainMod SHIFT, F, fullscreen  
-            bind = $mainMod, 36, exec, footclient
+            bind = $mainMod, Return, exec, footclient
             bind = $mainMod, Q, killactive, 
             bind = $mainMod SHIFT, E, exec, nwgbar  
             bind = $mainMod, N, exec, thunar 
