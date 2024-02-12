@@ -23,6 +23,17 @@ with pkgs.lib; {
         libsForQt5.qt5.qtwayland # screenshare testing
         qt6.qtwayland # screenshare testing
         adwaita-qt6 # screenshare testing
+        bibata-cursors  
+        hicolor-icon-theme
+        gtk-layer-shell
+        libsForQt5.polkit-kde-agent
+        #gtk4 # trying to fix a steam problem
+        #gtk3  # trying to fix a steam problem
+        #steam
+		###### Does it help setting this?? XDG_DATA_DIRS=/home/joakim/.nix-profile/share/applications:/home/joakim/.nix-profile/share/:/nix/var/nix/profiles/default/share:/home/joakim/.nix-profile/share:/usr/share/ubuntu:/usr/local/share:/usr/share:/var/lib/snapd/desktop:/usr/share/ubuntu-wayland:/usr/local/share:/usr/share:/var/lib/snapd/desktop
+
+
+		
         xdg-desktop-portal-hyprland
         #xdg-desktop-portal-wlr
         #xdg-desktop-portal
@@ -44,13 +55,8 @@ with pkgs.lib; {
         swaynotificationcenter      
         pavucontrol
 
-        bibata-cursors  
-        qt6.qtwayland
-        adwaita-qt6
-        polkit
-        hicolor-icon-theme
-        gtk-layer-shell
         ripdrag # drag files from terminal
+        ydotool # key automation tool
     ];
 
 # Fix for some XDG path issues:
@@ -111,6 +117,8 @@ gtk = {
       enable = true;
       #xwayland.enable = true;
       #systemdIntegration = true;
+      
+
       extraConfig = ''
             env = WLR_NO_HARDWARE_CURSORS,1
 
@@ -122,12 +130,40 @@ gtk = {
             # See https://wiki.hyprland.org/Configuring/Monitors/
 
 
+
             #Main config
             # laptop monitor:
-            monitor=eDP-1,1920x1080@60,860x1440,1
-            # Every other undefined monitor. This is configured to be above the laptop.
-            monitor=,3440x1440@100,0x0,1
+            #monitor=eDP-1,1920x1080@60,860x1440,1 # Setup 1, Center below
+            monitor=eDP-1,1920x1080@60,0x1440,1 # Setup 2, Left below
 
+            # Every other undefined monitor. This is configured to be above the laptop.
+            #monitor=,highres,0x0,1 # Setup 1, Center above
+            monitor=,highres,1920x0,1 # Setup 2, Right below
+            #monitor=,3440x1440@100,0x0,1
+
+
+
+            ###########################################################
+            #
+            #     Plugins
+            #
+            ##########################################################
+
+            # Hycov   - https://github.com/DreamMaoMao/hycov
+                bind = ALT,tab,hycov:toggleoverview
+                bind=ALT,left,hycov:movefocus,l
+                bind=ALT,right,hycov:movefocus,r
+                bind=ALT,up,hycov:movefocus,u
+                bind=ALT,down,hycov:movefocus,d
+
+                plugin {
+                    hycov {
+                      overview_gappo = 60 #gaps width from screen
+                      overview_gappi = 24 #gaps width from clients
+                	    hotarea_size = 10 #hotarea size in bottom left,10x10
+                	    enable_hotarea = 1 # enable mouse cursor hotarea
+                    }
+                }
 
 
             ###########################################################
@@ -147,14 +183,19 @@ gtk = {
             bind = $mainMod, F3, togglespecialworkspace # Default unnamed workspace
             bind = $mainMod SHIFT, F3, movetoworkspace, special
             bind = $mainMod, F4, exec, clipman pick -t wofi # Clipboard History
-            workspace = special:special-chat,gapsin:5,gapsout:5,bordersize:1
-            workspace = special:special-term,gapsin:10,gapsout:10,bordersize:1
-            workspace = special,gapsin:0,gapsout:0,bordersize:0
-
+            workspace = special:special-chat,gapsin:1,gapsout:0,bordersize:1
+            workspace = special:special-term,gapsin:1,gapsout:0,bordersize:1
+            workspace = special,gapsin:1,gapsout:0,bordersize:0
+			
+			# I use these paste files to put frequently used commands. Usefull when maintaining servers via SSH.
+            bind = , F5, exec, wl-copy < ~/paste1.txt && ydotool key 42:1 29:1 47:1 47:0 29:0 42:0 # Shift(42) CTRL(29) v(47)  # Paste content of file. Couldnt use only ydotool here, because of keyboard layout bug.
+            bind = , F6, exec, wl-copy < ~/paste2.txt && ydotool key 42:1 29:1 47:1 47:0 29:0 42:0 # Shift(42) CTRL(29) v(47)  # Paste content of file. Couldnt use only ydotool here, because of keyboard layout bug.
+            bind = , F7, exec, wl-copy < ~/paste3.txt && ydotool key 42:1 29:1 47:1 47:0 29:0 42:0 # Shift(42) CTRL(29) v(47)  # Paste content of file. Couldnt use only ydotool here, because of keyboard layout bug.
             
             #################################
             # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-		 # can check the keyname with: xev
+             # can check the keyname with: xev
+
             bind = $mainMod, B, exec, vivaldi 
             bind = $mainMod, T, exec, termius-app 
             bind = $mainMod, O, exec, obsidian 
@@ -373,6 +414,7 @@ gtk = {
 
             windowrule = opacity 0.85 override 0.85 override,^(catfish)$ 
             
+            windowrulev2 = opacity 1.0 override 1.0 override,class:^(firefox)$
             windowrulev2 = opacity 1.0 override 1.0 override,class:^(vivaldi-stable)$
             windowrulev2 = opacity 1.0 1.0, floating:1,class:^(vivaldi-stable)$
 
@@ -380,6 +422,13 @@ gtk = {
             windowrulev2 = opacity 1.0 override 1.0 override,class:^(Microsoft-edge)$
             windowrulev2 = tile,class:^(Microsoft-edge)$
             windowrulev2 = opacity 1.0 override 1.0 override,class:^(TradingView)$
+
+            
+	        windowrulev2 = opacity 1.0 override 1.0 override,class:^(evince)$ # Document viewer
+
+            windowrulev2 = opacity 1.0 override 1.0 override,class:^(warzone2100)$ # Game 
+            windowrulev2 = fakefullscreen ,class:^(warzone2100)$ # Game 
+            
 
         #	windowrulev2 = nomaxsize,class:^(terminal.exe)$
 
@@ -433,16 +482,18 @@ gtk = {
             
             exec-once = xrandr --output eDP-1 --primary # Workaround for issues with wine windows.
             #exec-once = /usr/lib/polkit-kde-authentication-agent-1
+            exec-once =  ~/.nix-profile/libexec/polkit-kde-authentication-agent-1 
             
             # This will make sure that xdg-desktop-portal-hyprland can get the required variables on startup.
             exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
             #exec-once = /usr/lib/xdg-desktop-portal-hyprland
             exec-once = ~/.nix-profile/libexec/xdg-desktop-portal-hyprland
-            exec-once = ~/.nix-profile/libexec/xdg-desktop-portal
+            #exec-once = ~/.nix-profile/libexec/xdg-desktop-portal
 
             exec-once = nm-applet --indicator # Network manager applet in waybar
-            exec-once = wl-paste -t text --watch clipman store --no-persist  # Copy history, accessible via "SUPER + F2"
-
+            exec-once = wl-paste -t text --watch clipman store --no-persist  # Copy history, accessible via "SUPER + F4"
+			exec-once = ydotoold # background service for the ydotool
+			
             ## Autostart apps
             #exec-once=[workspace 1 silent] vivaldi
             #exec-once=[workspace 3 silent] code
