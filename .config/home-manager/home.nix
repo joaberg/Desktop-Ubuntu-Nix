@@ -22,12 +22,15 @@
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
-  home.stateVersion = "23.05"; # Please read the comment before changing.
+  home.stateVersion = "23.11"; # Please read the comment before changing.
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
 
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0" # used by obsidian
+  ];
 
   # Need this to get some env correct.
   targets.genericLinux.enable = true;
@@ -72,7 +75,7 @@ imports = [
 
     vivaldi # browser
     termius  # terminal 
-    obsidian # notes
+    obsidian # notes # Currently using unsecure version of electron 25.9.0
     spotify # music
     wine   # windows emulator
     vscode
@@ -80,11 +83,15 @@ imports = [
     mattermost-desktop
     discord
     libreoffice
-    
+    #gscan2pdf # scanner tool
+	  wireshark   #packet sniffer
     ### Gaming 
-	 warzone2100
-    #steam  
-  ];
+	 #warzone2100
+   #gamescope
+    #steam 
+    openttd # game
+    ];
+
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
