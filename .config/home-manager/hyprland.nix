@@ -34,11 +34,11 @@ with pkgs.lib; {
 
 
 		
-        xdg-desktop-portal-hyprland
+       ## xdg-desktop-portal-hyprland
         #xdg-desktop-portal-wlr
         #xdg-desktop-portal
-        hyprkeys
-        hyprland-protocols
+      ##  hyprkeys
+      ##  hyprland-protocols
 
         nwg-launchers
         nwg-bar
@@ -64,7 +64,7 @@ with pkgs.lib; {
   xdg.mime.enable=true;
   targets.genericLinux.enable=true;
   xdg.systemDirs.data = [ "${config.home.homeDirectory}/.nix-profile/share/applications"  "${config.home.homeDirectory}/.nix-profile/share/" ];
-
+#  xdg.systemDirs.config = [ "/etc/xdg" ];
 
  
  services = {
@@ -122,11 +122,17 @@ gtk = {
       extraConfig = ''
             env = WLR_NO_HARDWARE_CURSORS,1
 
-            ###########################################################
+
+
+
+
+
+
+            # ##########################################################
             #
             #     Monitors
             #
-            ##########################################################
+            # #########################################################
             # See https://wiki.hyprland.org/Configuring/Monitors/
 
 
@@ -143,34 +149,12 @@ gtk = {
 
 
 
-            ###########################################################
-            #
-            #     Plugins
-            #
-            ##########################################################
 
-            # Hycov   - https://github.com/DreamMaoMao/hycov
-                bind = ALT,tab,hycov:toggleoverview
-                bind=ALT,left,hycov:movefocus,l
-                bind=ALT,right,hycov:movefocus,r
-                bind=ALT,up,hycov:movefocus,u
-                bind=ALT,down,hycov:movefocus,d
-
-                plugin {
-                    hycov {
-                      overview_gappo = 60 #gaps width from screen
-                      overview_gappi = 24 #gaps width from clients
-                	    hotarea_size = 10 #hotarea size in bottom left,10x10
-                	    enable_hotarea = 1 # enable mouse cursor hotarea
-                    }
-                }
-
-
-            ###########################################################
+            # ##########################################################
             #
             #     KeyBinds
             #
-            ##########################################################
+            # #########################################################
 
             # See https://wiki.hyprland.org/Configuring/Keywords/ for more
             $mainMod = SUPER 
@@ -192,7 +176,7 @@ gtk = {
             bind = , F6, exec, wl-copy < ~/paste2.txt && ydotool key 42:1 29:1 47:1 47:0 29:0 42:0 # Shift(42) CTRL(29) v(47)  # Paste content of file. Couldnt use only ydotool here, because of keyboard layout bug.
             bind = , F7, exec, wl-copy < ~/paste3.txt && ydotool key 42:1 29:1 47:1 47:0 29:0 42:0 # Shift(42) CTRL(29) v(47)  # Paste content of file. Couldnt use only ydotool here, because of keyboard layout bug.
             
-            #################################
+            # ################################
             # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
              # can check the keyname with: xev
 
@@ -213,7 +197,7 @@ gtk = {
             bind = $mainMod SHIFT, D, exec, nwg-drawer 
             bind = $mainMod, P, pseudo, # dwindle 
             bind = $mainMod, J, togglesplit, # dwindle 
-            ##################################
+            # #################################
 
             # Move focus with mainMod + arrow keys
             bind = $mainMod, left, workspace, r-1
@@ -269,7 +253,7 @@ gtk = {
         	#bind = , Print, exec, grimblast --notify --cursor copysave output
         	#bind = ALT, Print, exec, grimblast --notify --cursor copysave screen
 
-            #######################
+            # ######################
             # for resizing window
             # will switch to a submap called resize
             bind=$mainMod,R,submap,resize 
@@ -284,7 +268,7 @@ gtk = {
             bind=,escape,submap,reset 
             # will reset the submap, meaning end the current one and return to the global one
             submap=reset
-            #######################
+            # ######################
 
             # to move window
             #bind = $mainMod SHIFT,up, movewindow, u
@@ -293,11 +277,11 @@ gtk = {
             #bind = $mainMod SHIFT,right, movewindow, r
 
 
-            ###########################################################
+            # ##########################################################
             #
             #     Settings
             #
-            ##########################################################
+            # #########################################################
 
             # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
             input {
@@ -387,9 +371,6 @@ gtk = {
             }
             # Example per-device config
             # See https://wiki.hyprland.org/Configuring/Keywords/#executing for more
-            device:epic mouse V1 {
-                sensitivity = -0.5
-            }
 
 
 
@@ -397,11 +378,11 @@ gtk = {
 
 
 
-            ###########################################################
+            # ##########################################################
             #
             #     Window Rules
             #
-            ##########################################################
+            # #########################################################
             # Example windowrule v1
             # windowrule = float, ^(kitty)$
             # Example windowrule v2
@@ -434,6 +415,8 @@ gtk = {
 
         #	windowrulev2 = monitor eDP-1,class:^(terminal.exe)$
 
+            # warp-terminal
+            windowrulev2 = tile,class:^(dev.warp.Warp)$
 
             windowrulev2 = opacity 1.0 override 1.0 override,title:^(.*Picture in picture.*)$
 
@@ -452,11 +435,11 @@ gtk = {
             #blurls = waybar
 
 
-            ###########################################################
+            # ##########################################################
             #
             #     Startup
             #
-            ##########################################################
+            # #########################################################
 
 
 
@@ -468,7 +451,8 @@ gtk = {
 
             #Background
             #exec-once = wpaperd
-            exec-once = swaybg -m fill -i ~/.nix-profile/share/hyprland/wall_anime_8K.png
+            #exec-once = swaybg -m fill -i ~/.nix-profile/share/hyprland/wall_anime_8K.png
+            exec-once = swaybg -m fill -i ~/.nix-profile/share/hyprland/wall2.png
             
             #idle. Lock after 10 min. Turn off monitor after 30 min
         #	exec-once = swayidle -w timeout 600 'swaylock --clock --indicator --screenshots --effect-scale 0.4 --effect-vignette 0.2:0.5 --effect-blur 4x2 --datestr "%a %e.%m.%Y" --timestr "%k:%M"' timeout 1800 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'
@@ -494,7 +478,7 @@ gtk = {
             exec-once = wl-paste -t text --watch clipman store --no-persist  # Copy history, accessible via "SUPER + F4"
 			exec-once = ydotoold # background service for the ydotool
 			
-            ## Autostart apps
+            # # Autostart apps
             #exec-once=[workspace 1 silent] vivaldi
             #exec-once=[workspace 3 silent] code
             #exec-once=[workspace 3 silent] obsidian
@@ -512,6 +496,8 @@ gtk = {
 	 waybar = {
          enable = true;
          style = ''
+         /* To reload the config without restarting waybar: pkill --signal USR2 waybar */
+
             * {
                 color: #00B6EC;
                 border: 0;
@@ -682,6 +668,13 @@ gtk = {
                 box-shadow: inset -3px -3px #af99ff;
             }
 
+            #cpu.visible { color: red; }
+            #cpu.hidden { background-color: transparent; }
+            #custom-updates.visible { color: red; }
+            #custom-updates.hidden { background-color: transparent; }
+            #memory.visible { color: red; }
+            #memory.hidden { background-color: transparent; }
+
          '';
 
 
@@ -774,27 +767,50 @@ gtk = {
 		 	"custom/updates" = {
                     # add "%sudo ALL=NOPASSWD:/usr/bin/apt-get" to the sudoers file.
                     "exec"="(sudo apt-get update > /dev/null && sudo apt-get --just-print upgrade | grep -c ^Inst) || echo 0";
-		 	    	"exec-if"= "exit 0";
-		 	    	"on-click"= "foot zsh -c 'sudo apt upgrade && echo -e \"\n\n\033[31mRemember to also run home-manager-update\nPress Enter to close\033[0m\" && read'";
+                    "exec-if"= "exit 0";
+                    "on-click"= "foot zsh -c 'sudo apt upgrade && echo -e \"\n\n\033[31mRemember to also run home-manager-update\nPress Enter to close\033[0m\" && read'";
 		 	        "interval"= 14400; # every 4h
-		 	        "format"= "  {} ";
+                    "states" = {
+                        "visible" = 1;
+                        "hidden" = 0;
+                    };
+                    "format"= "";
+                    "format-visible" = "  {} ";
+                    "format-hidden"= "";
+                    #"format"= "  {} ";
 		 	};
 		 	
 		 	"network" = {
-		 	        "format"= " ⚠ Disabled ";
-		 	        "format-wifi" = "  {essid}";
-		 	        "format-ethernet" = "  {ifname}: {ipaddr}/{cidr} ";
-		 	        "format-disconnected"= " ⚠ Disconnected ";
+		 	        "format"= " ⚠Disabled ";
+		 	        "format-wifi" = " {essid}";
+		 	        "format-ethernet" = " {ipaddr} ";
+		 	        "format-disconnected"= " ⚠Disconnected ";
 		 	        "on-click"= "nm-connection-editor";
 		 	};
 		 	
-		 	"cpu" = {
-		 		"format" = "  {usage: >3}% ";
-		 	    "on-click"= "alacritty -e htop";
-		 	};
-		 	
+#		 	"cpu" = {
+#		 		"format" = "  {usage: >3}% ";
+#		 	    "on-click"= "alacritty -e htop";
+#		 	};
+            "cpu" = {
+                "states" = {
+                    "visible" = 80;
+                    "hidden" = 0;
+                };
+                "format" = " {usage: }%";
+                "format-visible" = " {usage: }%";
+                "format-hidden"= "";
+                "on-click"= "alacritty -e htop";
+            };
+
 		 	"memory" = {
-		 		"format" = "  {: >3}% ";
+                "states" = {
+                    "visible" = 80;
+                    "hidden" = 0;
+                };
+                "format-visible" = " {}% ";
+                "format-hidden"= "";
+		 	#	"format" = "  {: >3}% ";'
 		 	    "on-click"= "alacritty -e htop";
 		 	};
 		 	  
@@ -857,32 +873,36 @@ gtk = {
                     };
 		 	};
 		 	
+
 		 	"backlight" = {
 		 	        "device" = "intel_backlight";
-		 	        "format" = " {icon} {percent}% ";
-		 	        "format-icons" = ["" "" ""];
-		 	        "on-scroll-up" = "brightnessctl set 1%+";
-		 	        "on-scroll-down" = "brightnessctl set 1%-";
-		 	        "min-length" = 6;
+		 	        #"format" = " {icon} {percent}% ";
+		 	        "format" = " {icon}";
+		 	        #"format-icons" = ["" "" ""];
+		 	        "format-icons" = ["󱩐" "󱩑" "󱩒" "󱩓" "󱩔" "󱩕" "󱩖" "󰛨"];
+		 	        "on-scroll-up" = "brightnessctl set 5%+";
+		 	        "on-scroll-down" = "brightnessctl set 5%-";
 		 	};
 		 	
 		 	"battery" = {
 		 	        "states" = {
-		 	            "good" = 95;
+		 	            "good" = 80;
 		 	            "warning" = 30;
 		 	            "critical" = 20;
 		 	        };
-		 	        "format" = " {icon}  {capacity}% ";
-		 	        "format-charging" = "  {capacity}%";
-        			"format-plugged" = "  {capacity}%";
+		 	        "format" = " {icon}{capacity}% ";
+		 	        "format-good" = "";
+    		 	        "format-full" = "";
+		 	        "format-charging" = "{capacity}%";
+         			"format-plugged" = "{capacity}%";
 		 	        "format-alt" = "{time} {icon}";
 		 	        "format-icons" = ["" "" "" "" ""];
 		 	};
 		 	
 		 	"pulseaudio" = {
-		 	        "format" = " {icon} {volume}% ";
+		 	        "format" = " {icon}{volume}% ";
 		 	        "tooltip" = false;
-		 	        "format-muted" = " Muted";
+		 	        "format-muted" = "Muted";
                     "ignored-sinks"= ["ThinkPad Thunderbolt 3 Dock USB Audio Analog Stereo"];
 		 	        #"on-click" = "pamixer -t";
                     "on-click" = "pavucontrol";
@@ -912,8 +932,8 @@ gtk = {
 
 		 	"pulseaudio#microphone" = {
 		 	        "format" = "{format_source}";
-		 	        "format-source" = " {volume}%";
-        			"format-source-muted" = " Muted";
+		 	        "format-source" = "{volume}%";
+        			"format-source-muted" = "Muted";
 		 	        #"on-click" = "pamixer --default-source -t";
 		 	        "on-click" = "amixer set Capture toggle";
 		 	        #"on-scroll-up" = "pamixer --default-source -i 5";
