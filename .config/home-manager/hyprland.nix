@@ -158,18 +158,19 @@ gtk = {
 
             # See https://wiki.hyprland.org/Configuring/Keywords/ for more
             $mainMod = SUPER 
-            #Keybind info menu:
 
             bind = $mainMod, F1, togglespecialworkspace, special-chat
             bind = $mainMod SHIFT, F1, movetoworkspace, special:special-chat
             bind = $mainMod, F2, togglespecialworkspace, special-term
             bind = $mainMod SHIFT, F2, movetoworkspace, special:special-term
+            bind = $mainMod, 49, togglespecialworkspace # Default unnamed workspace # 49 = |
             bind = $mainMod, F3, togglespecialworkspace # Default unnamed workspace
             bind = $mainMod SHIFT, F3, movetoworkspace, special
             bind = $mainMod, F4, exec, clipman pick -t wofi # Clipboard History
             workspace = special:special-chat,gapsin:1,gapsout:0,bordersize:1
             workspace = special:special-term,gapsin:1,gapsout:0,bordersize:1
-            workspace = special,gapsin:1,gapsout:0,bordersize:0
+            workspace = special,gapsin:1,gapsout:0,bordersize:0,on-created-empty:WARP_ENABLE_WAYLAND=1 WGPU_BACKEND=vulkan warp-terminal
+            animation=specialWorkspace,1,8,default,slidefadevert -80%
 			
 			# I use these paste files to put frequently used commands. Usefull when maintaining servers via SSH.
             bind = , F5, exec, wl-copy < ~/paste1.txt && ydotool key 42:1 29:1 47:1 47:0 29:0 42:0 # Shift(42) CTRL(29) v(47)  # Paste content of file. Couldnt use only ydotool here, because of keyboard layout bug.
@@ -766,18 +767,10 @@ gtk = {
 		 	
 		 	"custom/updates" = {
                     # add "%sudo ALL=NOPASSWD:/usr/bin/apt-get" to the sudoers file.
-                    "exec"="(sudo apt-get update > /dev/null && sudo apt-get --just-print upgrade | grep -c ^Inst) || echo 0";
-                    "exec-if"= "exit 0";
+                    "exec"="(sudo apt-get update > /dev/null && sudo apt-get --just-print upgrade | grep -c ^Inst) || exit";
                     "on-click"= "foot zsh -c 'sudo apt upgrade && echo -e \"\n\n\033[31mRemember to also run home-manager-update\nPress Enter to close\033[0m\" && read'";
 		 	        "interval"= 14400; # every 4h
-                    "states" = {
-                        "visible" = 1;
-                        "hidden" = 0;
-                    };
-                    "format"= "";
-                    "format-visible" = "  {} ";
-                    "format-hidden"= "";
-                    #"format"= "  {} ";
+                    "format"= "  {} ";
 		 	};
 		 	
 		 	"network" = {
@@ -848,22 +841,23 @@ gtk = {
 		 	};
 		 	
 		 	"clock" = {
-		 			"format" = "{: %H:%M    %d/%m}";
+		 			#"format" = "{: %H:%M    %d/%m}";
+		 			"format" = " {:%H:%M   %d/%m}";
 		 	       	"tooltip-format" = "<tt><small>{calendar}</small></tt>";
 		 	       	"calendar" = {
-                    	"mode"          = "year";
-                    	"mode-mon-col"  = 3;
-                    	"weeks-pos"     = "right";
-                    	"on-scroll"     = 1;
-                    	"on-click-right"= "mode";
-                    	"format" = {
-                              "months" =     "<span color='#ffead3'><b>{}</b></span>";
-                              "days" =       "<span color='#ecc6d9'><b>{}</b></span>";
-                              "weeks" =      "<span color='#99ffdd'><b>W{}</b></span>";
-                              "weekdays" =   "<span color='#ffcc66'><b>{}</b></span>";
-                              "today" =      "<span color='#ff6699'><b><u>{}</u></b></span>";
-                        };
-                    };
+                        "mode"          = "year";
+                        "mode-mon-col"  = 3;
+                        "weeks-pos"     = "right";
+                        "on-scroll"     = 1;
+                        "on-click-right"= "mode";
+                        "format" = {
+                                "months" =     "<span color='#ffead3'><b>{}</b></span>";
+                                "days" =       "<span color='#ecc6d9'><b>{}</b></span>";
+                                "weeks" =      "<span color='#99ffdd'><b>W{}</b></span>";
+                                "weekdays" =   "<span color='#ffcc66'><b>{}</b></span>";
+                                "today" =      "<span color='#ff6699'><b><u>{}</u></b></span>";
+                       };
+                   };
         			"actions" =  {
                     			"on-click-right" = "mode"; 
                     			"on-click-forward" = "tz_up"; 
