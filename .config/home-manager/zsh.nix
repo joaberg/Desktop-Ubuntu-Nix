@@ -39,8 +39,8 @@ with pkgs.lib; {
     programs.micro = {
       enable = true;
       settings = {
-        clipboard = "terminal";
-        #clipboard = "external";
+        #clipboard = "terminal";
+        clipboard = "external";
         colorscheme = "dracula-tc";
         keymenu = true;
       };
@@ -210,6 +210,7 @@ with pkgs.lib; {
           { on = [ "<C-q>" ]; exec = "close"; desc = "Cancel input"; }
           { on = [ "<Enter>" ]; exec = "close --submit"; desc = "Submit the input"; }
           { on = [ "<Esc>" ]; exec = "escape"; desc = "Go back the normal mode, or cancel input"; }
+          { on = [ "<Backspace>" ]; exec = "backspace"; desc = "Backspace"; }
 
           # Mode
           { on = [ "i" ]; exec = "insert"; desc = "Enter insert mode"; }
@@ -335,7 +336,7 @@ programs.starship = {
 ###
     programs.zsh = {
         enable = true;
-        enableAutosuggestions = true;
+        autosuggestion.enable = true;
         
         #enableCompletion = true;
 
@@ -344,12 +345,13 @@ programs.starship = {
             l = "lsd";
             x = "exit";
             m = "micro";
-            vim = "hx";
             cat = "bat -p";
             ssh="TERM=xterm-256color ssh";
             ripdrag = "ripdrag $(fzf)";
             home-manager-update = "nix-channel --update && nix flake update ~/.config/home-manager/ && nix profile upgrade '.*' --impure && home-manager switch";
             home-manager-cleanup = "nix-collect-garbage &&  home-manager expire-generations \"-1 days\" && nix-store --optimise";
+            #nixos-update= "sudo nix-channel --update; sudo nix-env --install --attr nixpkgs.nix nixpkgs.cacert; sudo systemctl daemon-reload; sudo systemctl restart nix-daemon";
+            nixos-upgrade= "sudo nixos-rebuild switch --upgrade";
             backup_syncthing = "rsync -avz --delete ~/Documents ~/Downloads ~/Desktop ~/Backup/$(hostname)";
             snippet-nix-install-zsh = "curl -H \"Cache-Control: no-cache\" -sSL https://raw.githubusercontent.com/joaberg/server-zsh-nix/main/install.sh | bash";
             snippet-nix-update-zsh = "curl -H \"Cache-Control: no-cache\" -sSL https://raw.githubusercontent.com/joaberg/server-zsh-nix/main/update.sh | bash";
@@ -402,9 +404,11 @@ programs.starship = {
             # FZF Dracula colors
             export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
 
-            
+			# needed for warp-terminal bug
+			export WGPU_BACKEND=gl 
+			            
             # Launch neofetch
-            fastfetch
+            # fastfetch
             
 
             '';
@@ -412,10 +416,10 @@ programs.starship = {
     };
 
     # This is a workaround. By default most systems launch bash. This will make zsh start when bash is launched. Usefull if you dont have root access.
-    programs.bash.enable = true;
-    programs.bash.initExtra = ''
-        $HOME/.nix-profile/bin/zsh
-    '';
+    #programs.bash.enable = true;
+    #programs.bash.initExtra = ''
+    #    $HOME/.nix-profile/bin/zsh
+    #'';
 
 ###
 # SKIM
