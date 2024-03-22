@@ -1,0 +1,8 @@
+---
+"pane_group:navigate_right": ctrl-alt-right
+"editor_view:move_backward_one_subword": none
+"workspace:shift_focus_left": none
+"pane_group:navigate_left": ctrl-alt-left
+"workspace:shift_focus_right": none
+"input:toggle_natural_language_command_search": "ctrl-'"
+"editor_view:move_forward_one_subword": none
