@@ -30,6 +30,7 @@
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0" # used by obsidian
+    "openssl-1.1.1w" # used by sublime4
   ];
 
   # Need this to get some env correct.
@@ -90,6 +91,11 @@ imports = [
    #gamescope
     #steam 
     openttd # game
+    ncdu # disk usage utility
+#    lapce # vs code alternative
+#    nil # Nix lang server
+	 kate # Advanced text edirot
+	 nh # nix helper
     ];
 
 
@@ -140,6 +146,51 @@ imports = [
 
  };
 
+
+# Waybar alternative https://github.com/scorpion-26/gBar/blob/master/data/config
+#programs.gBar = {
+#        enable = true;
+#        config = {
+#
+#           WorkspaceScrollOnMonitor = true;
+#            WorkspaceScrollInvert = false;
+##            NumWorkspaces = 9;
+#            UseHyprlandIPC = true;
+#            CenterTime = true;
+#            TimeSpace = 300;
+#            #DateTimeStyle = %a %D - %H:%M:%S %Z;
+#            DateTimeStyle = "%a %d/%m - %H:%M";
+#            AudioInput = true;
+##            AudioRevealer = false;
+#            AudioScrollSpeed = 5;
+#            AudioNumbers = false;
+#            NetworkWidget = false;
+#            NetworkAdapter = "eno1";
+#            #CheckPackagesCommand: p="$(checkupdates)"; e=$?; if [ $e -eq 127 ] ; then exit 127; fi; if [ $e -eq 2 ] ; then echo "0" && exit 0; fi; echo "$p" | wc -l
+#            #CheckPackagesCommand = "(sudo apt-get update > /dev/null && sudo apt-get --just-print upgrade | grep -c ^Inst) || echo 0";
+#            Location = "T";
+#            EnableSNI = true;
+#            SNIIconSize = {
+#                Discord = 26;
+#                OBS = 23;
+#            };
+#            #WorkspaceSymbols = [ " " " " ];
+#        };
+#        extraConfig = ''
+#            WidgetsLeft: [Workspaces]
+#            WidgetsCenter: [Time]
+#            WidgetsRight: [Tray, Packages, Audio, Bluetooth, Network, Disk, VRAM, GPU, RAM, CPU, Battery, Power]
+#            CheckPackagesCommand: (sudo apt-get update > /dev/null && sudo apt-get --just-print upgrade | grep -c ^Inst) || echo 0
+#        '';
+#    };
+
+#programs.ironbar = {
+#            enable = true;
+            #config = {};
+            #style = "";
+            #package = ironbar;
+            #features = ["feature" "another_feature"];
+#};   
 
 programs.foot = {
     enable = true;
